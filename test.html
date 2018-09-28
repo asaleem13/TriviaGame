@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+</style>
+</head>
+<body>
+
+<input type="text" id="timer">
+
+<script>
+
+timer = new countDown;
+countDown.init();
+
+    function countDown() {
+        this.starttime = '2:30';
+        this.targetid = '#timer';
+        this.name = 'timer';
+        console.log(countDown.starttime);
+    }
+
+    countDown.init = function() {
+    this.reset();
+    setInterval(this.name + '.tick()', 1000);
+    }
+
+    countDown.reset = function() {
+        time = countDown.starttime.split(":");
+        this.minutes = parseInt(time[0]);
+        this.seconds = parseInt(time[1]);
+        this.update_target();
+    }
+
+    countDown.tick = function() {
+    if(this.seconds > 0 || this.minutes > 0) {
+        if(this.seconds === 0) {
+            this.minutes = this.minutes--;
+            this.seconds = 59;
+        } else {
+        this.seconds--;
+        }
+    }
+    this.update_target();
+    }
+
+    countDown.update_target = function() {
+        seconds = this.seconds;
+        if(seconds<10) {
+            "0" + seconds;
+            $(this.targetid).val(this.minutes + ":" + seconds);
+        }
+    }
+
+
+</script>
+
+</body>
+</html>
